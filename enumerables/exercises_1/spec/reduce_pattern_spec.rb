@@ -8,49 +8,65 @@ RSpec.describe 'reduce pattern' do
     expect(sum).to eq(473)
   end
 
-  xit 'subtracts a list of numbers' do
+  it 'subtracts a list of numbers' do
     numbers = [28, 12, 38, 1, 91]
     difference = 0
     numbers.each do |number|
-      # Your code goes here
+      difference = difference - number
     end
     expect(difference).to eq(-170)
   end
 
-  xit 'multiplies a list of numbers' do
+  it 'multiplies a list of numbers' do
     numbers = [2, 3, 5, 7]
     product = 1
-    # Your code goes here
+    numbers.each do |num|
+      product = product * num
+    end
     expect(product).to eq(210)
   end
 
-  xit 'capitalizes key words in phrase' do
+  it 'capitalizes key words in phrase' do
     keywords = ["fish", "blue"]
     phrase = 'one fish two fish red fish blue fish'
-    # Your code goes here
+    phrase_array = phrase.split(" ")
+    new_phrase = []
+    phrase_array.each do |wrd|
+      if keywords.include? wrd
+        new_phrase << wrd.upcase
+      else
+        new_phrase << wrd
+      end
+      phrase = new_phrase.join(" ")
+    end
     expect(phrase).to eq('one FISH two FISH red FISH BLUE FISH')
   end
 
-  xit 'divide 560 by a bunch of numbers' do
+  it 'divide 560 by a bunch of numbers' do
     numbers = [2, 2, 2, 5, 7]
     quotient = 560
-    # Your code goes here
+    numbers.each do |num|
+      quotient = quotient / num
+    end
     expect(quotient).to eq(2)
   end
 
-  xit 'subtracts smallest numbers from 100' do
+  it 'subtracts smallest numbers from 100' do
     elements = [[8, 5, 3], [1, 9, 11], [4, 7, 2], [19, 34, 6]]
     difference = 100
-    # Your code goes here
+    elements.each do |arr|
+      difference = difference - arr.min
+    end
     expect(difference).to eq(88)
   end
 
-  xit 'adds all second values together' do
+  it 'adds all second values together' do
     elements = [["a", 1], ["b", 9], ["c", 21]]
     sum = 0
-    # Your code goes here
+    elements.each do |arr|
+      sum = sum + arr[1]
+    end
     expect(sum).to eq(31)
   end
 
 end
-

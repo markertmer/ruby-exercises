@@ -1,4 +1,4 @@
-require './spec/spec-helper'
+require './spec/spec_helper'
 require './lib/centaur'
 
 RSpec.describe Centaur do
@@ -105,6 +105,9 @@ RSpec.describe Centaur do
     centaur.sleep
 
     expect(centaur.cranky?).to be false
+#### Added two tests
+    expect(centaur.shoot).to eq('NO!')
+    expect(centaur.run).to eq('NO!')
 
     centaur.stand_up
 
@@ -113,14 +116,65 @@ RSpec.describe Centaur do
   end
 
   it 'becomes rested after drinking a potion' do
-    # your code here
+    centaur = Centaur.new('Lenny', 'Mustang')
+
+    centaur.run
+    centaur.shoot
+    centaur.run
+
+    expect(centaur.shoot).to eq('NO!')
+    expect(centaur.sleep).to eq('NO!')
+
+    centaur.drink_potion
+
+    expect(centaur.shoot).to eq('Twang!!!')
   end
 
   it 'can only drink a potion whilst standing' do
-    # your code here
+    centaur = Centaur.new('Greg', 'Clydesdale')
+
+    centaur.run
+    centaur.shoot
+    centaur.run
+
+    expect(centaur.shoot).to eq('NO!')
+
+    centaur.lay_down
+
+    expect(centaur.drink_potion).to eq('NO!')
+
+    centaur.stand_up
+    centaur.drink_potion
+
+    expect(centaur.drink_potion).to_not eq('NO!')
+    expect(centaur.shoot).to eq ('Twang!!!')
   end
 
-  it 'gets stick if a potion is drunk while rested' do
-    # your code here
+  it 'gets sick if a potion is drunk while rested' do
+    centaur = Centaur.new('Barb', 'Palomino')
+
+    expect(centaur.sick?).to be false
+
+    centaur.run
+    centaur.shoot
+    centaur.run
+
+    expect(centaur.shoot).to eq('NO!')
+    expect(centaur.sleep).to eq('NO!')
+
+    centaur.lay_down
+    centaur.sleep
+
+    expect(centaur.shoot).to eq('NO!')
+
+    centaur.stand_up
+
+    #expect(centaur.shoot).to eq('Twang!!!')
+    #expect(centaur.cranky).to be 0
+
+    centaur.drink_potion
+
+    expect(centaur.sick?).to be true
+
   end
 end

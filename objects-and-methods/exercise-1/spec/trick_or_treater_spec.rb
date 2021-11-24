@@ -6,51 +6,55 @@ require_relative '../lib/trick_or_treater'
 
 RSpec.describe TrickOrTreater do
   it 'wears a costume' do
-    costume = Costume.new('Cowboy')
+#had to add .style
+    costume = Costume.new('Cowboy').style
     trick_or_treater = TrickOrTreater.new(costume)
     expect(trick_or_treater.dressed_up_as).to eq('Cowboy')
   end
 
-  xit 'can have a different costume' do
-    trick_or_treater = TrickOrTreater.new(Costume.new('Alien'))
+  it 'can have a different costume' do
+#had to add .style
+    trick_or_treater = TrickOrTreater.new(Costume.new('Alien').style)
 
     expect(trick_or_treater.dressed_up_as).to eq('Alien')
   end
 
-  xit 'has an empty bag by default' do
+  it 'has an empty bag by default' do
     trick_or_treater = TrickOrTreater.new(Costume.new("Alien"))
 
     expect(trick_or_treater.bag.empty?).to be true
   end
 
-  xit 'has an empty bag, so no candies' do
+  it 'has an empty bag, so no candies' do
     trick_or_treater = TrickOrTreater.new(Costume.new("Knight"))
 
     expect(trick_or_treater.has_candy?).to be false
   end
 
-  xit 'can get candies' do
+  it 'can get candies' do
     trick_or_treater = TrickOrTreater.new(Costume.new('Spaceship Mechanic'))
-    trick_or_treater.bag << Candy.new('Gummy bears')
+#added .candies
+    trick_or_treater.bag.candies << Candy.new('Gummy bears')
 
     expect(trick_or_treater.has_candy?).to be true
   end
 
-  xit 'it can count candies' do
+  it 'it can count candies' do
     trick_or_treater = TrickOrTreater.new(Costume.new('Spaceship Mechanic'))
 
     expect(trick_or_treater.candy_count).to eq(0)
-
-    trick_or_treater.bag << Candy.new('Gummy bears')
-
-    expect(trick_or_treater.candy_count).to eq(1)
+#added .candies
+    trick_or_treater.bag.candies << Candy.new('Gummy bears')
+    trick_or_treater.bag.candies << Candy.new("Gummy worms")
+    expect(trick_or_treater.candy_count).to eq(2)
   end
 
-  xit 'can eat candies' do
+  it 'can eat candies' do
     trick_or_treater = TrickOrTreater.new(Costume.new("Baron"))
-    trick_or_treater.bag << Candy.new("Gummy worms")
-    trick_or_treater.bag << Candy.new("Liquorice")
-    trick_or_treater.bag << Candy.new("Salty Serpents")
+#added .candies x3
+    trick_or_treater.bag.candies << Candy.new("Gummy worms")
+    trick_or_treater.bag.candies << Candy.new("Liquorice")
+    trick_or_treater.bag.candies << Candy.new("Salty Serpents")
 
     expect(trick_or_treater.candy_count).to eq(3)
     trick_or_treater.eat

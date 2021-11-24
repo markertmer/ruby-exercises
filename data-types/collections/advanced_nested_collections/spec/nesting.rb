@@ -1,4 +1,4 @@
-def stores 
+def stores  
   {
     olive_garden: {
       employees: [
@@ -81,5 +81,5 @@ def stores
         }
       ]
     }
-  } 
+  }
 end
